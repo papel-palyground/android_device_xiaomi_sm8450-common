@@ -231,6 +231,7 @@ public class RefreshSettingsFragment extends PreferenceFragment
         private final int[] items = {
                 R.string.refresh_default,
                 R.string.refresh_standard,
+                R.string.refresh_high,
                 R.string.refresh_extreme,
                 R.string.refresh_land
         };

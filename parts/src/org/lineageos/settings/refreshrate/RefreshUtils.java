@@ -41,8 +41,9 @@ public final class RefreshUtils {
 
     protected static final int STATE_DEFAULT = 0;
     protected static final int STATE_STANDARD = 1;
-    protected static final int STATE_EXTREME = 2;
-    protected static final int STATE_LAND = 3;
+    protected static final int STATE_HIGH = 2;
+    protected static final int STATE_EXTREME = 3;
+    protected static final int STATE_LAND = 4;
 
     private static final float REFRESH_STATE_DEFAULT = 120f;
     private static final float REFRESH_STATE_STANDARD = 60f;
@@ -154,7 +155,7 @@ public final class RefreshUtils {
         String value = mSharedPrefs.getString(REFRESH_CONTROL, null);
 
         if (value == null || value.isEmpty()) {
-            value = REFRESH_STANDARD + ":" + REFRESH_EXTREME + ":" + REFRESH_LAND;
+            value = REFRESH_STANDARD + ":" + REFRESH_EXTREME + ":" + REFRESH_HIGH + ":" + REFRESH_LAND;
             writeValue(value);
         }
 
@@ -162,8 +163,9 @@ public final class RefreshUtils {
         if (modes.length < 3) {
             modes = new String[] {
                 modes.length > 0 ? modes[0] : REFRESH_STANDARD,
-                modes.length > 1 ? modes[1] : REFRESH_EXTREME,
-                modes.length > 2 ? modes[2] : REFRESH_LAND
+                modes.length > 1 ? modes[1] : REFRESH_HIGH,
+                modes.length > 2 ? modes[2] : REFRESH_EXTREME,
+                modes.length > 3 ? modes[3] : REFRESH_LAND,
             };
             value = String.join(":", modes);
             writeValue(value);
@@ -187,7 +189,9 @@ public final class RefreshUtils {
             case STATE_LAND:
                 modes[2] = modes[2] + packageName + ",";
                 break;
-
+            case STATE_LAND:
+                modes[3] = modes[3] + packageName + ",";
+                break;
         }
 
         finalString = modes[0] + ":" + modes[1] + ":" + modes[2];
@@ -223,9 +227,12 @@ public final class RefreshUtils {
                 maxRate = REFRESH_STATE_STANDARD;
                 isAppInList = true;
             } else if (modes[1].contains(packageName + ",")) {
-                maxRate = REFRESH_STATE_EXTREME;
+                maxRate = REFRESH_STATE_HIGH;
                 isAppInList = true;
             } else if (modes[2].contains(packageName + ",")) {
+                maxRate = REFRESH_STATE_EXTREME;
+            isAppInList = true;
+            } else if (modes[3].contains(packageName + ",")) {
                 initializeOrientationListener(packageName);
                 isAppInList = true;
                 return;

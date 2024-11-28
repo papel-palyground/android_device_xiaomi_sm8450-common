@@ -89,4 +89,7 @@ public class BootCompletedReceiver extends BroadcastReceiver {
                 HdrCapabilities.HDR_TYPE_DOLBY_VISION, HdrCapabilities.HDR_TYPE_HDR10,
                 HdrCapabilities.HDR_TYPE_HLG, HdrCapabilities.HDR_TYPE_HDR10_PLUS});
     }
+
+    private static void onBootCompleted(Context context) {
+    }
 }

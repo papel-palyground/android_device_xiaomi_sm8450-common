@@ -146,3 +146,9 @@ public class DozeSettingsFragment extends PreferenceFragment
         helpDialog.show();
     }
 }
+
+    private void showHelp() {
+        HelpDialogFragment fragment = new HelpDialogFragment();
+        fragment.show(getFragmentManager(), "help_dialog");
+    }
+}

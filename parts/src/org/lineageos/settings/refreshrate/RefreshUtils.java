@@ -290,7 +290,7 @@ public final class RefreshUtils {
             state = STATE_STANDARD;
         } else if (modes[1].contains(packageName + ",")) {
             state = STATE_EXTREME;
-        } else if (modes[3].contains(packageName + ",")) {
+        } else if (modes[2].contains(packageName + ",")) {
             state = STATE_LAND;
         } else if (modes[3].contains(packageName + ",")) {
             state = STATE_90;
@@ -298,5 +298,9 @@ public final class RefreshUtils {
             state = STATE_90_LAND;
         }
         return state;
+    }
+
+    public void clearAllPerAppSettings() {
+        mSharedPrefs.edit().remove(REFRESH_CONTROL).apply();
     }
 }

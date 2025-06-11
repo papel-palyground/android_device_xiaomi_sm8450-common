@@ -155,17 +155,17 @@ public final class RefreshUtils {
         String value = mSharedPrefs.getString(REFRESH_CONTROL, null);
 
         if (value == null || value.isEmpty()) {
-            value = REFRESH_STANDARD + ":" + REFRESH_EXTREME + ":" + REFRESH_HIGH + ":" + REFRESH_LAND;
+            value = REFRESH_STANDARD + ":" + REFRESH_HIGH + ":" + REFRESH_EXTREME + ":" + REFRESH_LAND;
             writeValue(value);
         }
 
         String[] modes = value.split(":");
-        if (modes.length < 3) {
+        if (modes.length < 4) {
             modes = new String[] {
                 modes.length > 0 ? modes[0] : REFRESH_STANDARD,
                 modes.length > 1 ? modes[1] : REFRESH_HIGH,
                 modes.length > 2 ? modes[2] : REFRESH_EXTREME,
-                modes.length > 3 ? modes[3] : REFRESH_LAND,
+                modes.length > 3 ? modes[3] : REFRESH_LAND
             };
             value = String.join(":", modes);
             writeValue(value);
@@ -192,9 +192,10 @@ public final class RefreshUtils {
             case STATE_LAND:
                 modes[3] = modes[3] + packageName + ",";
                 break;
+
         }
 
-        finalString = modes[0] + ":" + modes[1] + ":" + modes[2];
+        finalString = modes[0] + ":" + modes[1] + ":" + modes[2] + ":" + modes[3];
 
         writeValue(finalString);
     }
@@ -207,7 +208,7 @@ public final class RefreshUtils {
             state = STATE_STANDARD;
         } else if (modes[1].contains(packageName + ",")) {
             state = STATE_EXTREME;
-        } else if (modes[2].contains(packageName + ",")) {
+        } else if (modes[3].contains(packageName + ",")) {
             state = STATE_LAND;
         }
         return state;
@@ -231,7 +232,7 @@ public final class RefreshUtils {
                 isAppInList = true;
             } else if (modes[2].contains(packageName + ",")) {
                 maxRate = REFRESH_STATE_EXTREME;
-            isAppInList = true;
+                isAppInList = true;
             } else if (modes[3].contains(packageName + ",")) {
                 initializeOrientationListener(packageName);
                 isAppInList = true;

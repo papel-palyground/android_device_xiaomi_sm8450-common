@@ -60,6 +60,12 @@ public class BootCompletedReceiver extends BroadcastReceiver {
             // Start necessary services
             startServices(context);
 
+            // Start Refresh Rate Service
+            RefreshUtils.startService(context);
+
+            // Override HDR types
+            overrideHdrTypes(context);
+
         } catch (Exception e) {
             Log.e(TAG, "Error during locked boot completed processing", e);
         }

@@ -128,7 +128,6 @@ PRODUCT_PACKAGES += \
     android.hardware.boot-service.qti.recovery
 
 # Camera
-$(call soong_config_set_bool,camera,override_format_from_reserved,true)
 $(call soong_config_set,libcameraservice,ext_lib,libcameraservice_extension.xiaomi_sm8450)
 
 PRODUCT_COPY_FILES += \

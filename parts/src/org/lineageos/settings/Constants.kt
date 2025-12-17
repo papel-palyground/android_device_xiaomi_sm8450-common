@@ -14,11 +14,10 @@
  * limitations under the License.
  */
 
-package org.lineageos.settings;
+package org.lineageos.settings
 
-public class Constants {
-
+object Constants {
     // Saturation
-    public static final String KEY_SATURATION = "saturation";
-    public static final String KEY_SATURATION_PREVIEW = "saturation_preview";
+    const val KEY_SATURATION = "saturation"
+    const val KEY_SATURATION_PREVIEW = "saturation_preview"
 }
